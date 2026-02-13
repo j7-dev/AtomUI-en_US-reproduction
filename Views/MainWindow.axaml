@@ -1,0 +1,48 @@
+<atom:Window xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:GetStartedApp.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:atom="https://atomui.net"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="GetStartedApp.Views.MainWindow"
+             x:DataType="vm:MainWindowViewModel"
+             Icon="/Assets/avalonia-logo.ico"
+             CanResize="True"
+             Background="White"
+             Title="AvaloniaApp">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+        <atom:DataGrid ItemsSource="{Binding Items}" CanUserFilterColumns="True">
+            <atom:DataGrid.Columns>
+                <atom:DataGridTemplateColumn Header="Name" CanUserSort="True" SupportedSortDirections="Descending"
+                                             SortMemberPath="Name" FilterMemberPath="Name">
+                    <atom:DataGridTemplateColumn.Filters>
+                        <atom:DataGridFilterItem Text="Joe" Value="Joe" />
+                        <atom:DataGridFilterItem Text="Jim" Value="Jim" />
+                        <atom:DataGridFilterItem Text="Submenu" Value="Submenu">
+                            <atom:DataGridFilterItem Text="Green" Value="Green" />
+                            <atom:DataGridFilterItem Text="Black" Value="Black" />
+                        </atom:DataGridFilterItem>
+                    </atom:DataGridTemplateColumn.Filters>
+                    <atom:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <atom:HyperLinkTextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </atom:DataGridTemplateColumn.CellTemplate>
+                </atom:DataGridTemplateColumn>
+                <atom:DataGridTextColumn Header="Age" Binding="{Binding Age}" SupportedSortDirections="All"
+                                         CanUserSort="True">
+                </atom:DataGridTextColumn>
+                <atom:DataGridTextColumn Header="Address" Binding="{Binding Address}" CanUserSort="True"
+                                         FilterMultiple="True" SupportedSortDirections="Ascending">
+                    <atom:DataGridTextColumn.Filters>
+                        <atom:DataGridFilterItem Text="London" Value="London" />
+                        <atom:DataGridFilterItem Text="New York" Value="New York" />
+                    </atom:DataGridTextColumn.Filters>
+                </atom:DataGridTextColumn>
+            </atom:DataGrid.Columns>
+        </atom:DataGrid>
+</atom:Window>
